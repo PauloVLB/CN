@@ -32,6 +32,17 @@ def gauss(M, pivotamento = 0):
 
     return M
 
+def refinamentoo(Ma, x_barra, pivotamento):
+    M = np.copy(Ma)
+    M[:, -1] -= M[:, :-1] @ x_barra
+    
+    gauss(M, pivotamento)
+    
+    x_barra = x_barra + M[:, -1]
+
+    return [x_barra, M[:, -1]]
+
+
 def refinamento(M, x_barra, pivotamento):
     # separa matriz A e vetor b
     A = np.copy(M[:, :-1])
